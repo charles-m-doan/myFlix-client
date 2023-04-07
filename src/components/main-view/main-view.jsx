@@ -78,7 +78,7 @@ export const MainView = () => {
       },
       Writers: [ 'Sadayuki Murai', 'Satoshi Kon' ],
       Actors: [ 'Mami Koyama', 'Shôzô Îzuka', 'Shouko Tsuda' ],
-      ImagePath: 'https://www.slantmagazine.com/wp-content/uploads/2003/11/millenniumactress.jpg',
+      ImagePath: 'https://upload.wikimedia.org/wikipedia/en/e/ee/Sennenyoyu.jpg',
     },
     {
       id: '642f01b6e45b1ce1d8de8d82',
