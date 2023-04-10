@@ -11,7 +11,7 @@ export const MainView = () => {
    fetch("https://siders-myflix.herokuapp.com/movies")
      .then((response) => response.json())
      .then((data) => {
-       const moviesFromApi = data.docs.map((doc) => {
+       const moviesFromApi = data.docs?.map((doc) => {
          return {
            id: doc.key,
            Title: doc.Title,
@@ -30,7 +30,7 @@ export const MainView = () => {
     );
   }
 
-  if (movies.length === 0) {
+  if (!movies || movies.length === 0) {
     return <div>The list is empty!</div>;
   }
 
