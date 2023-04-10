@@ -2926,44 +2926,36 @@ $parcel$ReactRefreshHelpers$98a3.prelude(module);
 try {
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _client = require("react-dom/client");
+var _mainView = require("./components/main-view/main-view");
 // Import statement to indicate that you need to bundle `./index.scss`
 var _indexScss = require("./index.scss");
 // Main component (will eventually use all the others)
-const MyFlixApplication = ()=>{
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "my-flix",
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-            children: "Good morning"
-        }, void 0, false, {
-            fileName: "src/index.jsx",
-            lineNumber: 10,
-            columnNumber: 7
-        }, undefined)
-    }, void 0, false, {
+const App = ()=>{
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _mainView.MainView), {}, void 0, false, {
         fileName: "src/index.jsx",
         lineNumber: 9,
-        columnNumber: 5
+        columnNumber: 11
     }, undefined);
 };
-_c = MyFlixApplication;
+_c = App;
 // Finds the root of your app
 const container = document.querySelector("#root");
 const root = (0, _client.createRoot)(container);
 // Tells React to render your app in the root DOM element
-root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(MyFlixApplication, {}, void 0, false, {
+root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(App, {}, void 0, false, {
     fileName: "src/index.jsx",
-    lineNumber: 20,
+    lineNumber: 17,
     columnNumber: 13
 }, undefined));
 var _c;
-$RefreshReg$(_c, "MyFlixApplication");
+$RefreshReg$(_c, "App");
 
   $parcel$ReactRefreshHelpers$98a3.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react-dom/client":"lOjBx","./index.scss":"lJZlQ","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"aPnnm"}],"iTorj":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react-dom/client":"lOjBx","./components/main-view/main-view":"4gflv","./index.scss":"lJZlQ","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"aPnnm"}],"iTorj":[function(require,module,exports) {
 "use strict";
 module.exports = require("efd7adb63d17673c");
 
@@ -27148,7 +27140,275 @@ module.exports = require("e63c040dfd4ac8d3");
     /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */ if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop === "function") __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(new Error());
 })();
 
-},{}],"lJZlQ":[function() {},{}],"aPnnm":[function(require,module,exports) {
+},{}],"4gflv":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$f7a6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$f7a6.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MainView", ()=>MainView);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _movieCard = require("../movie-card/movie-card");
+var _movieView = require("../movie-view/movie-view");
+var _s = $RefreshSig$();
+const MainView = ()=>{
+    _s();
+    const [movies, setMovies] = (0, _react.useState)([
+        {
+            id: "642f01b6e45b1ce1d8de8d81",
+            Title: "Magnolia",
+            Released: "1999",
+            Description: "An epic mosaic of interrelated characters in search of love, forgiveness and meaning in the San Fernando Valley.",
+            Genre: {
+                Name: "Drama",
+                Description: "The drama genre features stories with high stakes and many conflicts. They're plot-driven and demand that every character and scene move the story forward. "
+            },
+            Director: {
+                Name: "Paul Thomas Anderson",
+                Bio: "Paul Thomas Andersonis an American screenwriter and director whose character-driven films, set mostly in the American West, were recognized for their ambitious and engaging storytelling.",
+                Birth: "1970",
+                Death: "present"
+            },
+            Writers: [
+                "Paul Thomas Anderson"
+            ],
+            Actors: [
+                "Tom Cruise",
+                "William H. Macy",
+                "Philip Seymour Hoffman"
+            ],
+            ImagePath: "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/magnolia_ver2_480x.progressive.jpg?v=1601149120"
+        },
+        {
+            id: "642f01b6e45b1ce1d8de8d86",
+            Title: "The Truman Show",
+            Released: "1998",
+            Description: "An insurance salesman discovers his whole life is actually a reality TV show.",
+            Genre: {
+                Name: [
+                    "Drama",
+                    "Comedy"
+                ],
+                Description: "The drama genre features stories with high stakes and many conflicts. They're plot-driven and demand that every character and scene move the story forward."
+            },
+            Director: {
+                Name: "Peter Weir",
+                Bio: "Peter Lindsay Weir, (born August 21, 1944, Sydney, Australia), Australian film director and screenwriter known for intelligent emotional dramas that frequently explore the relationship between characters and their social environment.",
+                Birth: "1944",
+                Death: "present"
+            },
+            Writers: [
+                "Andrew Niccol"
+            ],
+            Actors: [
+                "Jim Carrey",
+                "Ed Harris",
+                "Laura Linney"
+            ],
+            ImagePath: "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/9ddfd95c8261fa7baf064ba513e1d487_2fe356be-fb6d-468f-b9ee-bd8e0e6ef074_480x.progressive.jpg?v=1573652450"
+        },
+        {
+            id: "642f014ce45b1ce1d8de8d6a",
+            Title: "The Revenant",
+            Released: "2015",
+            Description: "A frontiersman on a fur trading expedition in the 1820s fights for survival after being mauled by a bear and left for dead by members of his own hunting team.",
+            Genre: {
+                Name: [
+                    "Adventure",
+                    "Action",
+                    "Drama"
+                ],
+                Description: "A common theme of adventure films is of characters leaving their home or place of comfort and going to fulfill a goal, embarking on travels, quests, treasure hunts, heroic journeys; and explorations or searches for the unknown. "
+            },
+            Director: {
+                Name: "Alejandro G. I\xf1\xe1rritu",
+                Bio: "Alejandro Gonz\xe1lez I\xf1\xe1rritu is a Mexican film director.  Gonz\xe1lez I\xf1\xe1rritu is the first Mexican director to be nominated for the Academy Award for Best Director and by the Directors Guild of America for Best Director. He is also the first Mexican-born director to have won the Prix de la mise en scene or best director award at Cannes (2006).  His six feature films, 'Amores Perros' (2000), '21 Grams' (2003), 'Babel' (2006), 'Biutiful' (2010), 'Birdman' (2014) and 'The Revenant' (2015), have gained critical acclaim world-wide including two Academy Award nominations.",
+                Birth: "1963",
+                Death: "present"
+            },
+            Writers: [
+                "Mark L. Smith",
+                "Alejandro G. I\xf1\xe1rritu",
+                "Michael Punke"
+            ],
+            Actors: [
+                "Leonardo DiCaprio",
+                "Tom Hardy",
+                "Domhnall Gleeson"
+            ],
+            ImagePath: "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/2b783ded82e94bebc6fdead47b6f57f0_5fc9baff-134d-4ef2-b90c-ee8d0643fb9c_480x.progressive.jpg?v=1573588608"
+        },
+        {
+            id: "642f014ce45b1ce1d8de8d62",
+            Title: "Millenium Actress",
+            Released: "2001",
+            Description: "A TV interviewer and his cameraman meet a former actress and travel through her memories and career.",
+            Genre: {
+                Name: [
+                    "Fantasy",
+                    "Animation",
+                    "Arthouse"
+                ],
+                Description: "Fantasy films have fantastic themes; usually magic, supernatural events, mythology, folklore, or exotic fantasy worlds."
+            },
+            Director: {
+                Name: "Satoshi Kon",
+                Bio: "Japanese film director, animator, screenwriter and manga artist from Sapporo, Hokkaido and a member of the Japanese Animation Creators Association (JAniCA).",
+                Birth: "1963",
+                Death: "2010"
+            },
+            Writers: [
+                "Sadayuki Murai",
+                "Satoshi Kon"
+            ],
+            Actors: [
+                "Mami Koyama",
+                "Sh\xf4z\xf4 \xcezuka",
+                "Shouko Tsuda"
+            ],
+            ImagePath: "https://upload.wikimedia.org/wikipedia/en/e/ee/Sennenyoyu.jpg"
+        },
+        {
+            id: "642f01b6e45b1ce1d8de8d82",
+            Title: "Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb",
+            Released: "1964",
+            Description: "An insane American general orders a bombing attack on the Soviet Union, triggering a path to nuclear holocaust that a war room full of politicians and generals frantically tries to stop.",
+            Genre: {
+                Name: [
+                    "War",
+                    "Comedy"
+                ],
+                Description: "A War film is a film genre concerned with warfare, typically about naval, air, or land battles, with combat scenes central to the drama."
+            },
+            Director: {
+                Name: "Stanley Kubrick",
+                Bio: "Stanley Kubrick is an American motion-picture director and writer whose films are characterized by his dramatic visual style, meticulous attention to detail, and a detached, often ironic or pessimistic perspective. ",
+                Birth: "1928",
+                Death: "1999"
+            },
+            Writers: [
+                "Terry Southern",
+                "Peter George",
+                "Stanley Kubrick"
+            ],
+            Actors: [
+                "Peter Sellers",
+                "George C. Scott",
+                "Sterling Hayden"
+            ],
+            ImagePath: "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/0c11a7b58222c382891ae87be39454eb_8abc7615-c7a0-4a73-8b95-1da2e1123345_480x.progressive.jpg?v=1573594956"
+        }
+    ]);
+    const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
+    if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
+        movie: selectedMovie,
+        onBackClick: ()=>setSelectedMovie(null)
+    }, void 0, false, {
+        fileName: "src/components/main-view/main-view.jsx",
+        lineNumber: 108,
+        columnNumber: 7
+    }, undefined);
+    if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: "The list is empty!"
+    }, void 0, false, {
+        fileName: "src/components/main-view/main-view.jsx",
+        lineNumber: 113,
+        columnNumber: 12
+    }, undefined);
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
+                movie: movie,
+                onMovieClick: (newSelectedMovie)=>{
+                    setSelectedMovie(newSelectedMovie);
+                }
+            }, movie.id, false, {
+                fileName: "src/components/main-view/main-view.jsx",
+                lineNumber: 119,
+                columnNumber: 9
+            }, undefined))
+    }, void 0, false, {
+        fileName: "src/components/main-view/main-view.jsx",
+        lineNumber: 117,
+        columnNumber: 5
+    }, undefined);
+};
+_s(MainView, "S+9+U72aeYJokKNO4BL9MzLt9MM=");
+_c = MainView;
+var _c;
+$RefreshReg$(_c, "MainView");
+
+  $parcel$ReactRefreshHelpers$f7a6.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../movie-card/movie-card":"bwuIu","../movie-view/movie-view":"ggaUx","@parcel/transformer-js/src/esmodule-helpers.js":"VspGn","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"aPnnm"}],"bwuIu":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$67b2 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$67b2.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MovieCard", ()=>MovieCard);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+const MovieCard = ({ movie , onMovieClick  })=>{
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        onClick: ()=>{
+            onMovieClick(movie);
+        },
+        children: movie.Title
+    }, void 0, false, {
+        fileName: "src/components/movie-card/movie-card.jsx",
+        lineNumber: 3,
+        columnNumber: 6
+    }, undefined);
+};
+_c = MovieCard;
+var _c;
+$RefreshReg$(_c, "MovieCard");
+
+  $parcel$ReactRefreshHelpers$67b2.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"VspGn","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"aPnnm"}],"VspGn":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, "__esModule", {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"aPnnm":[function(require,module,exports) {
 "use strict";
 var Refresh = require("e26e4bdec3661c6b");
 function debounce(func, delay) {
@@ -27281,6 +27541,145 @@ function registerExportsForReactRefresh(module1) {
     }
 }
 
-},{"e26e4bdec3661c6b":"9RKTF"}]},["35hEr","kBt4G","d8Dch"], "d8Dch", "parcelRequireaec4")
+},{"e26e4bdec3661c6b":"9RKTF"}],"ggaUx":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$e9f6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$e9f6.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MovieView", ()=>MovieView);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+const MovieView = ({ movie , onBackClick  })=>{
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                    src: movie.ImagePath
+                }, void 0, false, {
+                    fileName: "src/components/movie-view/movie-view.jsx",
+                    lineNumber: 6,
+                    columnNumber: 10
+                }, undefined)
+            }, void 0, false, {
+                fileName: "src/components/movie-view/movie-view.jsx",
+                lineNumber: 5,
+                columnNumber: 8
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                        children: "Title: "
+                    }, void 0, false, {
+                        fileName: "src/components/movie-view/movie-view.jsx",
+                        lineNumber: 10,
+                        columnNumber: 10
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                        children: movie.Title
+                    }, void 0, false, {
+                        fileName: "src/components/movie-view/movie-view.jsx",
+                        lineNumber: 11,
+                        columnNumber: 10
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/movie-view/movie-view.jsx",
+                lineNumber: 9,
+                columnNumber: 8
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                        children: "Genre: "
+                    }, void 0, false, {
+                        fileName: "src/components/movie-view/movie-view.jsx",
+                        lineNumber: 15,
+                        columnNumber: 10
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                        children: movie.Genre.Name
+                    }, void 0, false, {
+                        fileName: "src/components/movie-view/movie-view.jsx",
+                        lineNumber: 16,
+                        columnNumber: 10
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/movie-view/movie-view.jsx",
+                lineNumber: 14,
+                columnNumber: 8
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                        children: "Description: "
+                    }, void 0, false, {
+                        fileName: "src/components/movie-view/movie-view.jsx",
+                        lineNumber: 20,
+                        columnNumber: 10
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                        children: movie.Description
+                    }, void 0, false, {
+                        fileName: "src/components/movie-view/movie-view.jsx",
+                        lineNumber: 21,
+                        columnNumber: 10
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/movie-view/movie-view.jsx",
+                lineNumber: 19,
+                columnNumber: 8
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                        children: "Director: "
+                    }, void 0, false, {
+                        fileName: "src/components/movie-view/movie-view.jsx",
+                        lineNumber: 25,
+                        columnNumber: 10
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                        children: movie.Director.Name
+                    }, void 0, false, {
+                        fileName: "src/components/movie-view/movie-view.jsx",
+                        lineNumber: 26,
+                        columnNumber: 10
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/movie-view/movie-view.jsx",
+                lineNumber: 24,
+                columnNumber: 8
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                onClick: onBackClick,
+                children: "Back"
+            }, void 0, false, {
+                fileName: "src/components/movie-view/movie-view.jsx",
+                lineNumber: 29,
+                columnNumber: 8
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/movie-view/movie-view.jsx",
+        lineNumber: 3,
+        columnNumber: 6
+    }, undefined);
+};
+_c = MovieView;
+var _c;
+$RefreshReg$(_c, "MovieView");
+
+  $parcel$ReactRefreshHelpers$e9f6.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"VspGn","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"aPnnm"}],"lJZlQ":[function() {},{}]},["35hEr","kBt4G","d8Dch"], "d8Dch", "parcelRequireaec4")
 
 //# sourceMappingURL=index.b4b6dfad.js.map
