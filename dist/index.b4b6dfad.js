@@ -27161,15 +27161,8 @@ const MainView = ()=>{
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
     (0, _react.useEffect)(()=>{
         fetch("https://siders-myflix.herokuapp.com/movies").then((response)=>response.json()).then((data)=>{
-            const moviesFromApi = data.docs?.map((doc)=>{
-                return {
-                    id: doc.key,
-                    Title: doc.Title,
-                    image: `https://siders-myflix.herokuapp.com/movies/ImagePath`,
-                    Director: doc.Director_name?.[0]
-                };
-            });
-            setMovies(moviesFromApi);
+            console.log(data);
+            setMovies(data);
         });
     }, []);
     if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
@@ -27177,14 +27170,14 @@ const MainView = ()=>{
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 29,
+        lineNumber: 21,
         columnNumber: 7
     }, undefined);
     if (!movies || movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "The list is empty!"
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 34,
+        lineNumber: 26,
         columnNumber: 12
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27195,12 +27188,12 @@ const MainView = ()=>{
                 }
             }, movie.id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 40,
+                lineNumber: 32,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 38,
+        lineNumber: 30,
         columnNumber: 5
     }, undefined);
 };
@@ -27243,10 +27236,10 @@ _c = MovieCard;
 MovieCard.propTypes = {
     movie: (0, _propTypesDefault.default).shape({
         Title: (0, _propTypesDefault.default).string.isRequired,
-        ImagePath: (0, _propTypesDefault.default).string.isRequired,
-        Director: (0, _propTypesDefault.default).string
+        ImagePath: (0, _propTypesDefault.default).string,
+        Director: (0, _propTypesDefault.default).object
     }).isRequired,
-    onBookClick: (0, _propTypesDefault.default).func.isRequired
+    onMovieClick: (0, _propTypesDefault.default).func.isRequired
 };
 var _c;
 $RefreshReg$(_c, "MovieCard");

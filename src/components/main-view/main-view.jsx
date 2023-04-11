@@ -11,16 +11,8 @@ export const MainView = () => {
    fetch("https://siders-myflix.herokuapp.com/movies")
      .then((response) => response.json())
      .then((data) => {
-       const moviesFromApi = data.docs?.map((doc) => {
-         return {
-           id: doc.key,
-           Title: doc.Title,
-           image: `https://siders-myflix.herokuapp.com/movies/ImagePath`,
-           Director: doc.Director_name?.[0]
-         };
-       });
-
-       setMovies (moviesFromApi);
+      console.log(data);
+       setMovies (data);
      });
  }, []);
 
