@@ -8,8 +8,9 @@ export const MovieCard = ({ movie, onMovieClick }) => {
       }}
     >
       <img src={movie.ImagePath} alt={"Poster for : " + movie.Title} /> ,
-      <h1> {movie.Title} </h1>
+      <h2> {movie.Title} </h2>
       <div> {"Director: " + movie.Director.Name} </div>
+      <span>____________________________________</span>
       <br /> <br /> <br />
     </div>
   );
