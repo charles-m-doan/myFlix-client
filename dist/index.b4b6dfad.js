@@ -27164,7 +27164,7 @@ const MainView = ()=>{
     const [token, setToken] = (0, _react.useState)(storedToken ? storedToken : null);
     const [movies, setMovies] = (0, _react.useState)([]);
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
-    const [user, setUser] = (0, _react.useState)(null);
+    const [user, setUser] = (0, _react.useState)(undefined);
     (0, _react.useEffect)(()=>{
         if (!token) return;
         fetch("https://siders-myflix.herokuapp.com/movies", {
@@ -27244,7 +27244,7 @@ const MainView = ()=>{
         columnNumber: 5
     }, undefined);
 };
-_s(MainView, "pD0g4ymmZRFmzJQ43DjsHDeq97M=");
+_s(MainView, "SeWHJ1Xwa9Fw+own122cU8wGQt8=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
