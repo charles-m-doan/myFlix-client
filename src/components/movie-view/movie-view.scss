@@ -6,14 +6,20 @@
    border-radius: 4px;
  }
  
- img {
-   width: 100%
- }
+img {
+width: 100%
+}
 
- .movie-info {
-   font-size: 18px;
+.movie-info {
+font-size: 18px;
+font-weight: bold;
+text-shadow: 0 0 2px #000;
+color: black;
+margin-bottom: 10px;
+}
+
+.heading {
+   color: white;
+   font-size: 20px;
    font-weight: bold;
-   text-shadow: 0 0 2px #000;
-   color: black;
-   margin-bottom: 10px;
-   }
+}
