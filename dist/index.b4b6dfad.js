@@ -41110,7 +41110,7 @@ const MovieView = ({ movie , onBackClick  })=>{
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                         className: "heading",
-                        children: "Title: "
+                        children: "Title:   "
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
                         lineNumber: 12,
@@ -41138,7 +41138,7 @@ const MovieView = ({ movie , onBackClick  })=>{
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                         className: "heading",
-                        children: "Genre: "
+                        children: "Genre:   "
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
                         lineNumber: 17,
