@@ -3,7 +3,8 @@ import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { SignupView } from '../signup-view/signup-view';
-import { NavigationBar } from "../navigation-bar/navigation-bar";
+import { NavigationBar } from '../navigation-bar/navigation-bar';
+import { ProfileView } from '../profile-view/profile-view';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -44,11 +45,11 @@ export const MainView = () => {
          <Row className='justify-content-md-center'>
             <Routes>
                <Route
-                  path="/login"
+                  path='/login'
                   element={
                      < >
                         {!user ? (
-                           <Navigate to="/" />
+                           <Navigate to='/' />
                         ) : (
                            <Col md={3}>
                               <LoginView
@@ -69,11 +70,11 @@ export const MainView = () => {
                <br /><br />
 
                <Route
-                  path="/signup"
+                  path='/signup'
                   element={
                      < >
                         {user ? (
-                           <Navigate to="/" />
+                           <Navigate to='/' />
                         ) :(
                            <Col md={3}>
                               <SignupView />
@@ -85,11 +86,11 @@ export const MainView = () => {
                />
 
                <Route
-                  path="/books/:bookId"
+                  path='/books/:bookId'
                   element={
                      < >
                         {!user ? (
-                           <Navigate to="/login" replace />
+                           <Navigate to='/login' replace />
                         ) : movies.length === 0 ? (
                            <Col>The list is empty!</Col>
                         ) : (
@@ -107,7 +108,7 @@ export const MainView = () => {
                   element={
                      < >
                         {!user ? (
-                           <Navigate to="/login" replace />
+                           <Navigate to='/login' replace />
                         ) : books.length === 0 ? (
                            <Col>The list is empty!</Col>
                         ) : (

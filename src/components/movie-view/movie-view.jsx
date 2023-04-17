@@ -32,7 +32,9 @@ export const MovieView = ({movie}) => {
             <span className='heading'>Director: </span>
             <span>{movie.Director.Name}</span>
          </div>
+
          <br />
+         
          <Button
             className='back-button'
             style={{ cursor: 'pointer' }}
