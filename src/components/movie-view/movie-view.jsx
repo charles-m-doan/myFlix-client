@@ -1,7 +1,12 @@
+import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 import './movie-view.scss';
 import Button from 'react-bootstrap/Button';
 
-export const MovieView = ({ movie, onBackClick }) => {
+export const MovieView = ({movie}) => {
+   const {movieID} = useParams();
+   const movie = movie.find((b) => b.id === movieId);
+
    return (
       <div class='movie-info'>
          <div>
@@ -29,7 +34,6 @@ export const MovieView = ({ movie, onBackClick }) => {
          </div>
          <br />
          <Button
-            onClick={onBackClick}
             className='back-button'
             style={{ cursor: 'pointer' }}
             >Back
