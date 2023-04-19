@@ -1,44 +1,43 @@
+import React from 'react';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import './movie-view.scss';
 import Button from 'react-bootstrap/Button';
 
-export const MovieView = ({movie}) => {
-   const {movieID} = useParams();
-   const movie = movie.find((b) => b.id === movieId);
+export const MovieView = ({movies}) => {
+   const {movieId} = useParams();
+   const myMovie = movies.find(movie => movie.id === movieId);
 
    return (
-      <div class='movie-info'>
+      <div className='movie-info'>
          <div>
-            <img src={movie.ImagePath} alt={"Poster for : " + movie.Title} />
+            <img src={myMovie.ImagePath} alt={"Poster for : " + myMovie.Title} />
          </div>
          <br />   
          <div>
             <span className='heading'>Title:   </span>
-            <span>{movie.Title}</span>
+            <span>{myMovie.Title}</span>
          </div>
          <br />   
          <div>
             <span className='heading'>Genre:   </span>
-            <span>{movie.Genre.Name}</span>
+            <span>{myMovie.Genre.Name}</span>
          </div>
          <br />   
          <div>
             <span className='heading'>Description: </span>
-            <span>{movie.Description}</span>
+            <span>{myMovie.Description}</span>
          </div>
          <br />   
          <div>
             <span className='heading'>Director: </span>
-            <span>{movie.Director.Name}</span>
+            <span>{myMovie.Director.Name}</span>
          </div>
 
          <br />
          
-         <Button
-            className='back-button'
-            style={{ cursor: 'pointer' }}
-            >Back
+         <Button className='back-button'>
+            <Link to='/'> Back </Link>
          </Button>
       </div>
    );

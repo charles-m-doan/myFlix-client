@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
@@ -36,8 +37,8 @@ export const MainView = () => {
          <NavigationBar
             user={user}
             onLoggedOut={() => {
-               setUser(null);
-               setToken(null);
+               setUser(undefined);
+               setToken(undefined);
                localStorage.clear();
             } }
          />
@@ -63,11 +64,16 @@ export const MainView = () => {
                         }
                      </>
                   }
-               />
-                  
-               <br /><br /><br />
-               Or Sign Up here:
-               <br /><br />
+               />  
+                              
+               {/* <React.Fragment>
+                  <br />
+                  <br />
+                  <br />
+                  <h3>Or sign up here:</h3>
+                  <br />
+                  <br />
+               </React.Fragment> */}
 
                <Route
                   path='/signup'
@@ -84,9 +90,8 @@ export const MainView = () => {
                      </>
                   }
                />
-
                <Route
-                  path='/books/:bookId'
+                  path='/movies/:movieId'
                   element={
                      < >
                         {!user ? (
@@ -95,21 +100,20 @@ export const MainView = () => {
                            <Col>The list is empty!</Col>
                         ) : (
                            <Col md={4}>
-                              <MovieView movies={movies} />
+                              <MovieView movie={movies.find((movie) => movie.id === movieId)} />
                            </Col>
                            )
                         }
                      </>
                   }
                />
-
                <Route
                   path="/"
                   element={
                      < >
                         {!user ? (
                            <Navigate to='/login' replace />
-                        ) : books.length === 0 ? (
+                        ) : movies.length === 0 ? (
                            <Col>The list is empty!</Col>
                         ) : (
                            < >

@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 import { Card, Col, Form, Button } from 'react-bootstrap';
 import { MovieCard } from '../movie-card/movie-card';
@@ -21,7 +22,7 @@ export const ProfileView = ({ user, token, movies, onLoggedOut, updateUser }) =>
          birthdate
       }
 
-      fetch('https://siders-myflix.herokuapp.com/users/username', {
+      fetch(`https://siders-myflix.herokuapp.com/users/${user.username}`, {
          method: 'PUT',
          body: JSON.stringify(data),
          headers: {
@@ -49,7 +50,7 @@ export const ProfileView = ({ user, token, movies, onLoggedOut, updateUser }) =>
    }
 
    const deleteAccount = () => {
-      fetch('https://siders-myflix.herokuapp.com/users/username', {
+      fetch(`https://siders-myflix.herokuapp.com/users/${user.username}`, {
          method: 'DELETE',
          headers: { Authorization: `Bearer ${token}` }
       })
