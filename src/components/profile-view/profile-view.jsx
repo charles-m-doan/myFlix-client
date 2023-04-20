@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Card, Col, Form, Button } from 'react-bootstrap';
 import { MovieCard } from '../movie-card/movie-card';
 
@@ -9,19 +8,24 @@ export const ProfileView = ({ user, token, movies, onLoggedOut, updateUser }) =>
    const [password, setPassword] = useState(' ');
    const [email, setEmail] = useState(' ');
    const [birthdate, setBirthdate] = useState(' ');
-
-   let favoriteMovies = movies.filter(movie => user.favoriteMovies.includes(movie.id));
+   const [favoriteMovies, setFavoriteMovies] = useState(user.favoriteMovies);
+   const addToFavorites = (movie) => { };
+   
+console.log('user:', user);
+console.log('movies:', movies);
+console.log('user.favoriteMovies:', user.favoriteMovies);
+   // let favoriteMovies = movies.filter(movie => user.favoriteMovies.includes(movie.id));
    
    const handleSubmit = event => {
       event.preventDefault();
 
       const data = {
-         username,
-         password,
-         email,
-         birthdate
+         username: user.username,
+         password: user.Password,
+         email: user.Email,
+         birthdate: user.Birthday
       }
-
+ 
       fetch(`https://siders-myflix.herokuapp.com/users/${user.username}`, {
          method: 'PUT',
          body: JSON.stringify(data),
@@ -67,6 +71,8 @@ export const ProfileView = ({ user, token, movies, onLoggedOut, updateUser }) =>
       });
    }
 
+   const filteredMovies = movies.filter(movie => favoriteMovies.includes(movie._id));
+
    return (
       <>
          <Col justify-content-md-center>           
@@ -75,7 +81,7 @@ export const ProfileView = ({ user, token, movies, onLoggedOut, updateUser }) =>
                      <Card.Title >Your info</Card.Title>
                      <p>Username: {user.username}</p>
                      <p>Email: {user.email}</p>
-                     <p>Birthdate: {user.birthdate.slice(0, 10)}</p>
+                     <p>Birthdate: {user.birthdate}</p>
                   </Card.Body>
                </Card>
                <Button onClick={() => {

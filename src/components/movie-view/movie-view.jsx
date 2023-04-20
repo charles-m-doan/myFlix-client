@@ -6,13 +6,14 @@ import Button from 'react-bootstrap/Button';
 
 export const MovieView = ({movies}) => {
    const {movieId} = useParams();
-   const myMovie = movies.find(movie => movie.id === movieId);
+   const myMovie = movies && movies.find(movie => movie.id === parseInt(movieId));
+
 
    return (
       <div className='movie-info'>
-         <div>
+         {/* <div>
             <img src={myMovie.ImagePath} alt={"Poster for : " + myMovie.Title} />
-         </div>
+         </div> */}
          <br />   
          <div>
             <span className='heading'>Title:   </span>

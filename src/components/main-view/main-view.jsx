@@ -9,6 +9,7 @@ import { ProfileView } from '../profile-view/profile-view';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -18,19 +19,21 @@ export const MainView = () => {
   const [user, setUser] = useState(undefined);
 
    useEffect(() => {
+      getMovies(token);
+   }, [token]);
+
+   const getMovies = (token) => {
       if (!token) {
          return;
       }
 
       fetch('https://siders-myflix.herokuapp.com/movies', {
          headers: { Authorization: `Bearer ${token}` }
-      } )
-         .then((response) => response.json())
+      }) .then((response) => response.json())
          .then((data) => {
-         console.log(data);
-         setMovies(data);
+            setMovies(data);
          });
-   }, [token]);
+   }
    
    return (
       <BrowserRouter>
@@ -49,7 +52,7 @@ export const MainView = () => {
                   path='/login'
                   element={
                      < >
-                        {!user ? (
+                        {user ? (
                            <Navigate to='/' />
                         ) : (
                            <Col md={3}>
@@ -100,10 +103,24 @@ export const MainView = () => {
                            <Col>The list is empty!</Col>
                         ) : (
                            <Col md={4}>
-                              <MovieView movie={movies.find((movie) => movie.id === movieId)} />
+                              <MovieView movie={movies} />
                            </Col>
                            )
                         }
+                     </>
+                  }
+               />
+               <Route
+                  path="/profile"
+                  element={
+                     <>
+                        {!user ? (
+                           <Navigate to="/login" replace />
+                        ) : (
+                           <Col>
+                              <ProfileView user={user} movies={movies}/>
+                           </Col>
+                        )}
                      </>
                   }
                />
