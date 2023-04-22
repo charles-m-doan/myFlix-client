@@ -8,12 +8,15 @@ export const ProfileView = ({ user, token, movies, onLoggedOut, updateUser }) =>
    const [password, setPassword] = useState(' ');
    const [email, setEmail] = useState(' ');
    const [birthdate, setBirthdate] = useState(' ');
-   const [favoriteMovies, setFavoriteMovies] = useState(user.favoriteMovies);
+   // const [favoriteMovies, setFavoriteMovies] = useState(user.favoriteMovies);
+   const [favoriteMovies, setFavoriteMovies] = useState(user.favoriteMovies || []);
+
    const addToFavorites = (movie) => { };
    
 console.log('user:', user);
 console.log('movies:', movies);
 console.log('user.favoriteMovies:', user.favoriteMovies);
+
    // let favoriteMovies = movies.filter(movie => user.favoriteMovies.includes(movie.id));
    
    const handleSubmit = event => {
@@ -71,7 +74,9 @@ console.log('user.favoriteMovies:', user.favoriteMovies);
       });
    }
 
-   const filteredMovies = movies.filter(movie => favoriteMovies.includes(movie._id));
+   // const filteredMovies = movies.filter(movie => favoriteMovies.includes(movie._id));
+   const filteredMovies = movies.filter(movie => favoriteMovies && favoriteMovies.includes(movie._id));
+
 
    return (
       <>

@@ -11,12 +11,22 @@ import Col from 'react-bootstrap/Col';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 
-export const MainView = () => {
-  const storedUser = JSON.parse(localStorage.getItem('user'));
-  const storedToken = localStorage.getItem('token');
-  const [token, setToken] = useState(storedToken ? storedToken : null);
-  const [movies, setMovies] = useState([]);
-  const [user, setUser] = useState(undefined);
+export const MainView = ({movies}) => {
+   const storedUser = JSON.parse(localStorage.getItem('user'));
+   const storedToken = localStorage.getItem('token');
+   const [token, setToken] = useState(storedToken ? storedToken : null);
+   const [movies, setMovies] = useState([]);
+   const [user, setUser] = useState(undefined);
+   
+   const updateUser = (newUser) => {
+      setUser(newUser);
+   };
+   
+   const onLoggedOut = () => {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      updateUser(null);
+   };
 
    useEffect(() => {
       getMovies(token);
@@ -35,6 +45,29 @@ export const MainView = () => {
          });
    }
    
+   const handleAddToFavorite = (movieId) => {
+      console.log("The value of movieId is: ", movieId);
+
+      const accessToken = localStorage.getItem('token');
+      const userId = JSON.parse(localStorage.getItem('user'))._id;
+      
+      // Call the add to favorites API
+      fetch(`https://siders-myflix.herokuapp.com/users/${userId}/movies/${movieId}`, {
+         method: 'POST',
+         headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+         }
+      })
+      .then(response => response.json())
+      .then(data => {
+         console.log(`Movie added to favorites: ${JSON.stringify(data)}`);
+      })
+      .catch(error => {
+         console.error(`Error adding movie to favorites: ${error}`);
+      });
+   };
+
    return (
       <BrowserRouter>
          <NavigationBar
@@ -118,12 +151,26 @@ export const MainView = () => {
                            <Navigate to="/login" replace />
                         ) : (
                            <Col>
-                              <ProfileView user={user} movies={movies}/>
+                              <ProfileView user={user} token={token} movies={movies} onLoggedOut={onLoggedOut} updateUser={updateUser} />
                            </Col>
                         )}
                      </>
                   }
                />
+               <Route path="/users/:Username" render={({ match }) => {
+                  return (
+                     <ProfileView
+                        user={user}
+                        token={token}
+                        movies={movies}
+                        favoriteMovies={user.favoriteMovies} // add the favoriteMovies prop here
+                        onLoggedOut={() => { onLoggedOut() }}
+                        updateUser={(user) => { updateUser(user) }}
+                        match={match}
+                     />
+                  );
+               } } />
+
                <Route
                   path="/"
                   element={
@@ -140,7 +187,8 @@ export const MainView = () => {
                                     md={4}
                                     className='mb-5'
                                  >
-                                    <MovieCard movie={movie} />
+                                    <MovieCard movie={movie} addToFavorites={() => handleAddToFavorite(movie.id)} />
+
                                  </Col>
                               ) ) }
                            </>
