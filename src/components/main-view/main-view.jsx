@@ -11,17 +11,17 @@ import Col from 'react-bootstrap/Col';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 
-export const MainView = ({movies}) => {
+export const MainView = () => {
    const storedUser = JSON.parse(localStorage.getItem('user'));
    const storedToken = localStorage.getItem('token');
    const [token, setToken] = useState(storedToken ? storedToken : null);
    const [movies, setMovies] = useState([]);
    const [user, setUser] = useState(undefined);
-   
+
    const updateUser = (newUser) => {
       setUser(newUser);
    };
-   
+ 
    const onLoggedOut = () => {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
@@ -51,7 +51,7 @@ export const MainView = ({movies}) => {
       const accessToken = localStorage.getItem('token');
       const userId = JSON.parse(localStorage.getItem('user'))._id;
       
-      // Call the add to favorites API
+      // Add to favorites
       fetch(`https://siders-myflix.herokuapp.com/users/${userId}/movies/${movieId}`, {
          method: 'POST',
          headers: {
@@ -136,7 +136,7 @@ export const MainView = ({movies}) => {
                            <Col>The list is empty!</Col>
                         ) : (
                            <Col md={4}>
-                              <MovieView movie={movies} />
+                              <MovieView movieList={movies} />
                            </Col>
                            )
                         }
@@ -163,7 +163,7 @@ export const MainView = ({movies}) => {
                         user={user}
                         token={token}
                         movies={movies}
-                        favoriteMovies={user.favoriteMovies} // add the favoriteMovies prop here
+                        favoriteMovies={user.favoriteMovies}
                         onLoggedOut={() => { onLoggedOut() }}
                         updateUser={(user) => { updateUser(user) }}
                         match={match}

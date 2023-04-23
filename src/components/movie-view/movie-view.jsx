@@ -4,32 +4,31 @@ import { Link } from 'react-router-dom';
 import './movie-view.scss';
 import Button from 'react-bootstrap/Button';
 
-export const MovieView = ({movies}) => {
+export const MovieView = ({movieList}) => {
    const {movieId} = useParams();
-   const myMovie = movies && movies.find(movie => movie.id === parseInt(movieId));
-
+   const myMovie = movieList && movieList.find(movie => movie._id === (movieId));
 
    return (
       <div className='movie-info'>
-         {/* <div>
+         <div>
             <img src={myMovie.ImagePath} alt={"Poster for : " + myMovie.Title} />
-         </div> */}
-         <br />   
+         </div>
+         <br />
          <div>
             <span className='heading'>Title:   </span>
             <span>{myMovie.Title}</span>
          </div>
-         <br />   
+         <br />
          <div>
             <span className='heading'>Genre:   </span>
             <span>{myMovie.Genre.Name}</span>
          </div>
-         <br />   
+         <br />
          <div>
             <span className='heading'>Description: </span>
             <span>{myMovie.Description}</span>
          </div>
-         <br />   
+         <br /> 
          <div>
             <span className='heading'>Director: </span>
             <span>{myMovie.Director.Name}</span>
