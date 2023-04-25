@@ -9,13 +9,13 @@ export const ProfileView = ({ user, token, movies, onLoggedOut, updateUser }) =>
    const [email, setEmail] = useState(' ');
    const [birthdate, setBirthdate] = useState(' ');
    // const [favoriteMovies, setFavoriteMovies] = useState(user.favoriteMovies);
-   const [favoriteMovies, setFavoriteMovies] = useState(user.favoriteMovies || []);
+   const [favoriteMovies, setFavoriteMovies] = useState(user.FavoriteMovies || []);
 
    const addToFavorites = (movie) => { };
    
-console.log('user:', user);
-console.log('movies:', movies);
-console.log('user.favoriteMovies:', user.favoriteMovies);
+console.log("user: ", user);
+console.log("movies: ", movies);
+console.log("user.favoriteMovies: ", user.favoriteMovies);
 
    // let favoriteMovies = movies.filter(movie => user.favoriteMovies.includes(movie.id));
    
@@ -23,13 +23,13 @@ console.log('user.favoriteMovies:', user.favoriteMovies);
       event.preventDefault();
 
       const data = {
-         username: user.username,
-         password: user.Password,
-         email: user.Email,
-         birthdate: user.Birthday
-      }
+         username,
+         password,
+         email,
+         birthdate
+       }       
  
-      fetch(`https://siders-myflix.herokuapp.com/users/${user.username}`, {
+      fetch(`https://siders-myflix.herokuapp.com/users/${user.Username}`, {
          method: 'PUT',
          body: JSON.stringify(data),
          headers: {
@@ -57,7 +57,7 @@ console.log('user.favoriteMovies:', user.favoriteMovies);
    }
 
    const deleteAccount = () => {
-      fetch(`https://siders-myflix.herokuapp.com/users/${user.username}`, {
+      fetch(`https://siders-myflix.herokuapp.com/users/${user.Username}`, {
          method: 'DELETE',
          headers: { Authorization: `Bearer ${token}` }
       })
@@ -77,16 +77,15 @@ console.log('user.favoriteMovies:', user.favoriteMovies);
    // const filteredMovies = movies.filter(movie => favoriteMovies.includes(movie._id));
    const filteredMovies = movies.filter(movie => favoriteMovies && favoriteMovies.includes(movie._id));
 
-
    return (
       <>
          <Col justify-content-md-center>           
                <Card>
                   <Card.Body>
                      <Card.Title >Your info</Card.Title>
-                     <p>Username: {user.username}</p>
-                     <p>Email: {user.email}</p>
-                     <p>Birthdate: {user.birthdate}</p>
+                     <p>Username: {user.Username}</p>
+                     <p>Email: {user.Email}</p>
+                     <p>Birthdate: {user.Birthday}</p>
                   </Card.Body>
                </Card>
                <Button onClick={() => {
@@ -95,10 +94,12 @@ console.log('user.favoriteMovies:', user.favoriteMovies);
                   }
                }}>Delete user account</Button>
          </Col>
+         <br />
          <Col justify-content-md-center>
                <Card>
                   <Card.Body>
                      <Card.Title>Update your info</Card.Title>
+                     <br />
                      <Form onSubmit={handleSubmit}>
                            <Form.Group>
                               <Form.Label>Username:</Form.Label>
@@ -110,6 +111,7 @@ console.log('user.favoriteMovies:', user.favoriteMovies);
                                  minLength={3}
                               />
                            </Form.Group>
+                           <br />
                            <Form.Group>
                               <Form.Label>Password:</Form.Label>
                               <Form.Control
@@ -119,6 +121,7 @@ console.log('user.favoriteMovies:', user.favoriteMovies);
                                  required
                               />
                            </Form.Group>
+                           <br />
                            <Form.Group>
                               <Form.Label>Email:</Form.Label>
                               <Form.Control
@@ -128,15 +131,17 @@ console.log('user.favoriteMovies:', user.favoriteMovies);
                                  required
                               />
                            </Form.Group>
+                           <br />
                            <Form.Group>
                               <Form.Label>Birthdate:</Form.Label>
                               <Form.Control
                                  type='date'
                                  value={birthdate}
                                  onChange={e => setBirthdate(e.target.value)}
-                                 required
+                                 // required
                               />
                            </Form.Group>
+                           <br />
                            <Button type='submit'>Submit</Button>
                      </Form>
                   </Card.Body>
@@ -145,9 +150,14 @@ console.log('user.favoriteMovies:', user.favoriteMovies);
          <Col justify-content-md-center>
                <h3>Your favorites:</h3>
          </Col>
-         {favoriteMovies.map(movie => (
+         {filteredMovies.map(movie => (
                <Col justify-content-md-center key={movie.id}>
-                  <MovieCard movie={movie} />
+                  <MovieCard
+                     movie={movie}
+                     addToFavorites={addToFavorites}
+                     setFavoriteMovies={setFavoriteMovies}
+                     user={user}
+                  />
                </Col>
          ))}
       </>

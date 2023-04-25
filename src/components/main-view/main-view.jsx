@@ -46,13 +46,13 @@ export const MainView = () => {
    }
    
    const handleAddToFavorite = (movieId) => {
-      console.log("The value of movieId is: ", movieId);
+      // console.log("The value of movieId is: ", movieId);
 
       const accessToken = localStorage.getItem('token');
-      const userId = JSON.parse(localStorage.getItem('user'))._id;
+      const userName = JSON.parse(localStorage.getItem('user')).Username;
       
       // Add to favorites
-      fetch(`https://siders-myflix.herokuapp.com/users/${userId}/movies/${movieId}`, {
+      fetch(`https://siders-myflix.herokuapp.com/users/${userName}/movies/${movieId}`, {
          method: 'POST',
          headers: {
             'Authorization': `Bearer ${accessToken}`,
@@ -62,6 +62,12 @@ export const MainView = () => {
       .then(response => response.json())
       .then(data => {
          console.log(`Movie added to favorites: ${JSON.stringify(data)}`);
+      
+         const updatedFavorites = [...user.FavoriteMovies, data._id];
+         user.FavoriteMovies.push(data._id);
+         const updateUser = { ...user, FavoriteMovies: updatedFavorites };
+         setUser(updateUser);
+         
       })
       .catch(error => {
          console.error(`Error adding movie to favorites: ${error}`);
@@ -187,7 +193,7 @@ export const MainView = () => {
                                     md={4}
                                     className='mb-5'
                                  >
-                                    <MovieCard movie={movie} addToFavorites={() => handleAddToFavorite(movie.id)} />
+                                    <MovieCard movie={movie} addToFavorites={handleAddToFavorite} />
 
                                  </Col>
                               ) ) }
