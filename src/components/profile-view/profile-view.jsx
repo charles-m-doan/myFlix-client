@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Card, Col, Form, Button } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Card, Col, Form, Button, Row } from 'react-bootstrap';
 import { MovieCard } from '../movie-card/movie-card';
 
 export const ProfileView = ({ user, token, movies, onLoggedOut, updateUser }) => {
@@ -18,6 +18,32 @@ console.log("movies: ", movies);
 console.log("user.favoriteMovies: ", user.favoriteMovies);
 
    // let favoriteMovies = movies.filter(movie => user.favoriteMovies.includes(movie.id));
+   
+   const handleGetUserFavorites = () => {
+      const accessToken = localStorage.getItem('token');
+      const userName = JSON.parse(localStorage.getItem('user')).Username;
+      
+      // Add to favorites
+      fetch(`https://siders-myflix.herokuapp.com/users/${userName}`, {
+         method: 'GET',
+         headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+         }
+      })
+      .then(response => response.json())
+      .then(data => {
+         console.log(`User profile: ${JSON.stringify(data)}`);
+      
+         setUserProfile(data);
+
+         var filtered = movies.filter(movie => data.FavoriteMovies.includes(movie._id))
+         setFilteredMovies(filtered);
+      })
+      .catch(error => {
+         console.error(`Error: ${error}`);
+      });
+   };
    
    const handleSubmit = event => {
       event.preventDefault();
@@ -82,7 +108,7 @@ console.log("user.favoriteMovies: ", user.favoriteMovies);
          <Col justify-content-md-center>           
                <Card>
                   <Card.Body>
-                     <Card.Title >Your info</Card.Title>
+                     <Card.Title >Your info :</Card.Title>
                      <p>Username: {user.Username}</p>
                      <p>Email: {user.Email}</p>
                      <p>Birthdate: {user.Birthday}</p>
@@ -98,7 +124,7 @@ console.log("user.favoriteMovies: ", user.favoriteMovies);
          <Col justify-content-md-center>
                <Card>
                   <Card.Body>
-                     <Card.Title>Update your info</Card.Title>
+                     <Card.Title>Update your info :</Card.Title>
                      <br />
                      <Form onSubmit={handleSubmit}>
                            <Form.Group>
@@ -148,17 +174,24 @@ console.log("user.favoriteMovies: ", user.favoriteMovies);
                </Card>
          </Col>
          <Col justify-content-md-center>
-               <h3>Your favorites:</h3>
+               <h3>Your Favorites:</h3>
          </Col>
+
          {filteredMovies.map(movie => (
-               <Col justify-content-md-center key={movie.id}>
-                  <MovieCard
-                     movie={movie}
-                     addToFavorites={addToFavorites}
-                     setFavoriteMovies={setFavoriteMovies}
-                     user={user}
-                  />
-               </Col>
+            
+            <Col
+               justify-content-md-center
+               key={movie.id}
+               md={3}
+               className='mb-3'
+            >
+               <MovieCard
+                  movie={movie}
+                  addToFavorites={addToFavorites}
+                  setFavoriteMovies={setFavoriteMovies}
+                  user={user}
+               />
+            </Col>
          ))}
       </>
    );

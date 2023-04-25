@@ -16,7 +16,7 @@ export const MainView = () => {
    const storedToken = localStorage.getItem('token');
    const [token, setToken] = useState(storedToken ? storedToken : null);
    const [movies, setMovies] = useState([]);
-   const [user, setUser] = useState(undefined);
+   const [user, setUser] = useState(storedUser? storedUser : null);
 
    const updateUser = (newUser) => {
       setUser(newUser);
@@ -46,7 +46,7 @@ export const MainView = () => {
    }
    
    const handleAddToFavorite = (movieId) => {
-      // console.log("The value of movieId is: ", movieId);
+      console.log("The value of movieId is: ", movieId);
 
       const accessToken = localStorage.getItem('token');
       const userName = JSON.parse(localStorage.getItem('user')).Username;
@@ -62,7 +62,7 @@ export const MainView = () => {
       .then(response => response.json())
       .then(data => {
          console.log(`Movie added to favorites: ${JSON.stringify(data)}`);
-      
+         alert("Movie added to favorites");
          const updatedFavorites = [...user.FavoriteMovies, data._id];
          user.FavoriteMovies.push(data._id);
          const updateUser = { ...user, FavoriteMovies: updatedFavorites };
