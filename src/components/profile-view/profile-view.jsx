@@ -4,12 +4,13 @@ import { MovieCard } from '../movie-card/movie-card';
 
 export const ProfileView = ({ user, token, movies, onLoggedOut, updateUser }) => {
 
-   const [username, setUsername] = useState(' ');
-   const [password, setPassword] = useState(' ');
-   const [email, setEmail] = useState(' ');
-   const [birthdate, setBirthdate] = useState(' ');
+   const [username, setUsername] = useState('');
+   const [password, setPassword] = useState('');
+   const [email, setEmail] = useState('');
+   const [birthdate, setBirthdate] = useState('');
    // const [favoriteMovies, setFavoriteMovies] = useState(user.favoriteMovies);
    const [favoriteMovies, setFavoriteMovies] = useState(user.FavoriteMovies || []);
+   const [filteredMovies, setFilteredMovies] = useState([]);
 
    const addToFavorites = (movie) => { };
    
@@ -35,7 +36,7 @@ console.log("user.favoriteMovies: ", user.favoriteMovies);
       .then(data => {
          console.log(`User profile: ${JSON.stringify(data)}`);
       
-         setUserProfile(data);
+         // setUserProfile(data);
 
          var filtered = movies.filter(movie => data.FavoriteMovies.includes(movie._id))
          setFilteredMovies(filtered);
@@ -45,11 +46,9 @@ console.log("user.favoriteMovies: ", user.favoriteMovies);
       });
    };
    
-   // const [filteredMovies, setFilteredMovies] = useState([]);
-   
-   // useEffect(() => {
-   //    handleGetUserFavorites()
-   // }, []);
+   useEffect(() => {
+      handleGetUserFavorites();
+   }, []);
 
    const handleSubmit = async(event) => {
       event.preventDefault();
@@ -99,7 +98,7 @@ console.log("user.favoriteMovies: ", user.favoriteMovies);
    }
 
    // const filteredMovies = movies.filter(movie => favoriteMovies.includes(movie._id));
-   const filteredMovies = movies.filter(movie => favoriteMovies && favoriteMovies.includes(movie._id));
+   // const filteredMovies = movies.filter(movie => favoriteMovies && favoriteMovies.includes(movie._id));
 
    return (
       <>
@@ -125,48 +124,48 @@ console.log("user.favoriteMovies: ", user.favoriteMovies);
                      <Card.Title>Update your info :</Card.Title>
                      <br />
                      <Form onSubmit={(e) => handleSubmit(e)}>
-                           <Form.Group>
-                              <Form.Label>Username:</Form.Label>
-                              <Form.Control
-                                 type='text'
-                                 value={username}
-                                 onChange={e => setUsername(e.target.value)}
-                                 required
-                                 minLength={3}
-                              />
-                           </Form.Group>
-                           <br />
-                           <Form.Group>
-                              <Form.Label>Password:</Form.Label>
-                              <Form.Control
-                                 type='password'
-                                 value={password}
-                                 onChange={e => setPassword(e.target.value)}
-                                 required
-                              />
-                           </Form.Group>
-                           <br />
-                           <Form.Group>
-                              <Form.Label>Email:</Form.Label>
-                              <Form.Control
-                                 type='email'
-                                 value={email}
-                                 onChange={e => setEmail(e.target.value)}
-                                 required
-                              />
-                           </Form.Group>
-                           <br />
-                           <Form.Group>
-                              <Form.Label>Birthdate:</Form.Label>
-                              <Form.Control
-                                 type='date'
-                                 value={birthdate}
-                                 onChange={e => setBirthdate(e.target.value)}
-                                 // required
-                              />
-                           </Form.Group>
-                           <br />
-                           <Button type='submit'>Submit</Button>
+                        <Form.Group>
+                           <Form.Label>Username:</Form.Label>
+                           <Form.Control
+                              type='text'
+                              value={username}
+                              onChange={e => setUsername(e.target.value)}
+                              required
+                              minLength={3}
+                           />
+                        </Form.Group>
+                        <br />
+                        <Form.Group>
+                           <Form.Label>Password:</Form.Label>
+                           <Form.Control
+                              type='password'
+                              value={password}
+                              onChange={e => setPassword(e.target.value)}
+                              required
+                           />
+                        </Form.Group>
+                        <br />
+                        <Form.Group>
+                           <Form.Label>Email:</Form.Label>
+                           <Form.Control
+                              type='email'
+                              value={email}
+                              onChange={e => setEmail(e.target.value)}
+                              required
+                           />
+                        </Form.Group>
+                        <br />
+                        <Form.Group>
+                           <Form.Label>Birthdate:</Form.Label>
+                           <Form.Control
+                              type='date'
+                              value={birthdate}
+                              onChange={e => setBirthdate(e.target.value)}
+                              // required
+                           />
+                        </Form.Group>
+                        <br />
+                        <Button type='submit'>Submit</Button>
                      </Form>
                   </Card.Body>
                </Card>

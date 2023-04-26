@@ -66,7 +66,7 @@ export const MainView = () => {
          const updatedFavorites = [...user.FavoriteMovies, data._id];
          user.FavoriteMovies.push(data._id);
          const updateUser = { ...user, FavoriteMovies: updatedFavorites };
-         setUser(updateUser);
+         // setUser(updateUser);
          setUser({ ...user, FavoriteMovies: updatedFavorites });
 
          setMovies(prevMovies => prevMovies.map(movie => {

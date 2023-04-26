@@ -27221,7 +27221,7 @@ const MainView = ()=>{
                 ...user,
                 FavoriteMovies: updatedFavorites
             };
-            setUser(updateUser);
+            // setUser(updateUser);
             setUser({
                 ...user,
                 FavoriteMovies: updatedFavorites
@@ -43529,12 +43529,13 @@ var _movieCard = require("../movie-card/movie-card");
 var _s = $RefreshSig$();
 const ProfileView = ({ user , token , movies , onLoggedOut , updateUser  })=>{
     _s();
-    const [username, setUsername] = (0, _react.useState)(" ");
-    const [password, setPassword] = (0, _react.useState)(" ");
-    const [email, setEmail] = (0, _react.useState)(" ");
-    const [birthdate, setBirthdate] = (0, _react.useState)(" ");
+    const [username, setUsername] = (0, _react.useState)("");
+    const [password, setPassword] = (0, _react.useState)("");
+    const [email, setEmail] = (0, _react.useState)("");
+    const [birthdate, setBirthdate] = (0, _react.useState)("");
     // const [favoriteMovies, setFavoriteMovies] = useState(user.favoriteMovies);
     const [favoriteMovies, setFavoriteMovies] = (0, _react.useState)(user.FavoriteMovies || []);
+    const [filteredMovies, setFilteredMovies] = (0, _react.useState)([]);
     const addToFavorites = (movie)=>{};
     console.log("user: ", user);
     console.log("movies: ", movies);
@@ -43552,17 +43553,16 @@ const ProfileView = ({ user , token , movies , onLoggedOut , updateUser  })=>{
             }
         }).then((response)=>response.json()).then((data)=>{
             console.log(`User profile: ${JSON.stringify(data)}`);
-            setUserProfile(data);
+            // setUserProfile(data);
             var filtered = movies.filter((movie)=>data.FavoriteMovies.includes(movie._id));
             setFilteredMovies(filtered);
         }).catch((error)=>{
             console.error(`Error: ${error}`);
         });
     };
-    // const [filteredMovies, setFilteredMovies] = useState([]);
-    // useEffect(() => {
-    //    handleGetUserFavorites()
-    // }, []);
+    (0, _react.useEffect)(()=>{
+        handleGetUserFavorites();
+    }, []);
     const handleSubmit = async (event)=>{
         event.preventDefault();
         const data = {
@@ -43602,7 +43602,7 @@ const ProfileView = ({ user , token , movies , onLoggedOut , updateUser  })=>{
         });
     };
     // const filteredMovies = movies.filter(movie => favoriteMovies.includes(movie._id));
-    const filteredMovies = movies.filter((movie)=>favoriteMovies && favoriteMovies.includes(movie._id));
+    // const filteredMovies = movies.filter(movie => favoriteMovies && favoriteMovies.includes(movie._id));
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
@@ -43615,7 +43615,7 @@ const ProfileView = ({ user , token , movies , onLoggedOut , updateUser  })=>{
                                     children: "Your info :"
                                 }, void 0, false, {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 109,
+                                    lineNumber: 108,
                                     columnNumber: 22
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -43625,7 +43625,7 @@ const ProfileView = ({ user , token , movies , onLoggedOut , updateUser  })=>{
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 110,
+                                    lineNumber: 109,
                                     columnNumber: 22
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -43635,7 +43635,7 @@ const ProfileView = ({ user , token , movies , onLoggedOut , updateUser  })=>{
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 111,
+                                    lineNumber: 110,
                                     columnNumber: 22
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -43645,18 +43645,18 @@ const ProfileView = ({ user , token , movies , onLoggedOut , updateUser  })=>{
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 112,
+                                    lineNumber: 111,
                                     columnNumber: 22
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 108,
+                            lineNumber: 107,
                             columnNumber: 19
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 107,
+                        lineNumber: 106,
                         columnNumber: 16
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
@@ -43666,18 +43666,18 @@ const ProfileView = ({ user , token , movies , onLoggedOut , updateUser  })=>{
                         children: "Delete user account"
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 115,
+                        lineNumber: 114,
                         columnNumber: 16
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 106,
+                lineNumber: 105,
                 columnNumber: 10
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 121,
+                lineNumber: 120,
                 columnNumber: 10
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
@@ -43689,12 +43689,12 @@ const ProfileView = ({ user , token , movies , onLoggedOut , updateUser  })=>{
                                 children: "Update your info :"
                             }, void 0, false, {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 125,
+                                lineNumber: 124,
                                 columnNumber: 22
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 126,
+                                lineNumber: 125,
                                 columnNumber: 22
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form), {
@@ -43706,8 +43706,8 @@ const ProfileView = ({ user , token , movies , onLoggedOut , updateUser  })=>{
                                                 children: "Username:"
                                             }, void 0, false, {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 129,
-                                                columnNumber: 31
+                                                lineNumber: 128,
+                                                columnNumber: 28
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
                                                 type: "text",
@@ -43717,19 +43717,19 @@ const ProfileView = ({ user , token , movies , onLoggedOut , updateUser  })=>{
                                                 minLength: 3
                                             }, void 0, false, {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 130,
-                                                columnNumber: 31
+                                                lineNumber: 129,
+                                                columnNumber: 28
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 128,
-                                        columnNumber: 28
+                                        lineNumber: 127,
+                                        columnNumber: 25
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 138,
-                                        columnNumber: 28
+                                        lineNumber: 137,
+                                        columnNumber: 25
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
                                         children: [
@@ -43737,8 +43737,8 @@ const ProfileView = ({ user , token , movies , onLoggedOut , updateUser  })=>{
                                                 children: "Password:"
                                             }, void 0, false, {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 140,
-                                                columnNumber: 31
+                                                lineNumber: 139,
+                                                columnNumber: 28
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
                                                 type: "password",
@@ -43747,19 +43747,19 @@ const ProfileView = ({ user , token , movies , onLoggedOut , updateUser  })=>{
                                                 required: true
                                             }, void 0, false, {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 141,
-                                                columnNumber: 31
+                                                lineNumber: 140,
+                                                columnNumber: 28
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 139,
-                                        columnNumber: 28
+                                        lineNumber: 138,
+                                        columnNumber: 25
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 148,
-                                        columnNumber: 28
+                                        lineNumber: 147,
+                                        columnNumber: 25
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
                                         children: [
@@ -43767,8 +43767,8 @@ const ProfileView = ({ user , token , movies , onLoggedOut , updateUser  })=>{
                                                 children: "Email:"
                                             }, void 0, false, {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 150,
-                                                columnNumber: 31
+                                                lineNumber: 149,
+                                                columnNumber: 28
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
                                                 type: "email",
@@ -43777,19 +43777,19 @@ const ProfileView = ({ user , token , movies , onLoggedOut , updateUser  })=>{
                                                 required: true
                                             }, void 0, false, {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 151,
-                                                columnNumber: 31
+                                                lineNumber: 150,
+                                                columnNumber: 28
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 149,
-                                        columnNumber: 28
+                                        lineNumber: 148,
+                                        columnNumber: 25
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 158,
-                                        columnNumber: 28
+                                        lineNumber: 157,
+                                        columnNumber: 25
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
                                         children: [
@@ -43797,8 +43797,8 @@ const ProfileView = ({ user , token , movies , onLoggedOut , updateUser  })=>{
                                                 children: "Birthdate:"
                                             }, void 0, false, {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 160,
-                                                columnNumber: 31
+                                                lineNumber: 159,
+                                                columnNumber: 28
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
                                                 type: "date",
@@ -43806,48 +43806,48 @@ const ProfileView = ({ user , token , movies , onLoggedOut , updateUser  })=>{
                                                 onChange: (e)=>setBirthdate(e.target.value)
                                             }, void 0, false, {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 161,
-                                                columnNumber: 31
+                                                lineNumber: 160,
+                                                columnNumber: 28
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 159,
-                                        columnNumber: 28
+                                        lineNumber: 158,
+                                        columnNumber: 25
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 168,
-                                        columnNumber: 28
+                                        lineNumber: 167,
+                                        columnNumber: 25
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
                                         type: "submit",
                                         children: "Submit"
                                     }, void 0, false, {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 169,
-                                        columnNumber: 28
+                                        lineNumber: 168,
+                                        columnNumber: 25
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 127,
+                                lineNumber: 126,
                                 columnNumber: 22
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 124,
+                        lineNumber: 123,
                         columnNumber: 19
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 123,
+                    lineNumber: 122,
                     columnNumber: 16
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 122,
+                lineNumber: 121,
                 columnNumber: 10
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
@@ -43856,12 +43856,12 @@ const ProfileView = ({ user , token , movies , onLoggedOut , updateUser  })=>{
                     children: "Your Favorites:"
                 }, void 0, false, {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 175,
+                    lineNumber: 174,
                     columnNumber: 16
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 174,
+                lineNumber: 173,
                 columnNumber: 10
             }, undefined),
             filteredMovies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
@@ -43875,18 +43875,18 @@ const ProfileView = ({ user , token , movies , onLoggedOut , updateUser  })=>{
                         user: user
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 186,
+                        lineNumber: 185,
                         columnNumber: 16
                     }, undefined)
                 }, movie.id, false, {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 180,
+                    lineNumber: 179,
                     columnNumber: 13
                 }, undefined))
         ]
     }, void 0, true);
 };
-_s(ProfileView, "lx0OO0Hkh42Vakk64nE0OLzXan8=");
+_s(ProfileView, "2qr7x6fiCeJ4I4MNjDR7fnHayXc=");
 _c = ProfileView;
 var _c;
 $RefreshReg$(_c, "ProfileView");
