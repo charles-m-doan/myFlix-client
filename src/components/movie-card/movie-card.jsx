@@ -13,6 +13,7 @@ export const MovieCard = ({movie, addToFavorites, setFavoriteMovies, user}) => {
       addToFavorites(movie._id);
       if (user && user.FavoriteMovies) {
         setFavoriteMovies([user.FavoriteMovies, movie._id]);
+        setUser(updateUser);
       }
     };
 

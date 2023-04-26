@@ -45,42 +45,40 @@ console.log("user.favoriteMovies: ", user.favoriteMovies);
       });
    };
    
-   const handleSubmit = event => {
+   // const [filteredMovies, setFilteredMovies] = useState([]);
+   
+   // useEffect(() => {
+   //    handleGetUserFavorites()
+   // }, []);
+
+   const handleSubmit = async(event) => {
       event.preventDefault();
 
       const data = {
-         username,
-         password,
-         email,
-         birthdate
+         Username: username,
+         Password: password,
+         Email: email,
+         Birthday: birthdate
        }       
  
-      fetch(`https://siders-myflix.herokuapp.com/users/${user.Username}`, {
+      const updateUser = await fetch(`https://siders-myflix.herokuapp.com/users/${user.Username}`, {
          method: 'PUT',
          body: JSON.stringify(data),
          headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
-      }
+         }
       })
-      .then(response => {
-         if (response.ok) {
-               return response.json();
+      
+      const response = await updateUser.json()
+         if (response) {
+            alert("Changes successful");
+            localStorage.clear();
+            window.location.reload();
          } else {
-               alert("Changes failed");
-               return false;
+            alert("Changes successful");
          }
-      })
-      .then(user => {
-         if (user) {
-               alert("Changes successful");
-               updateUser(user);
-         }
-      })
-      .catch(e => {
-         alert(e);
-      });
-   }
+      };
 
    const deleteAccount = () => {
       fetch(`https://siders-myflix.herokuapp.com/users/${user.Username}`, {
@@ -126,7 +124,7 @@ console.log("user.favoriteMovies: ", user.favoriteMovies);
                   <Card.Body>
                      <Card.Title>Update your info :</Card.Title>
                      <br />
-                     <Form onSubmit={handleSubmit}>
+                     <Form onSubmit={(e) => handleSubmit(e)}>
                            <Form.Group>
                               <Form.Label>Username:</Form.Label>
                               <Form.Control

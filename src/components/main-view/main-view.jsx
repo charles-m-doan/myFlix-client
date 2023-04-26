@@ -67,6 +67,19 @@ export const MainView = () => {
          user.FavoriteMovies.push(data._id);
          const updateUser = { ...user, FavoriteMovies: updatedFavorites };
          setUser(updateUser);
+         setUser({ ...user, FavoriteMovies: updatedFavorites });
+
+         setMovies(prevMovies => prevMovies.map(movie => {
+            if (movie._id === data._id) {
+              return {
+                ...movie,
+                Favorite: true
+              }
+            } else {
+              return movie;
+            }
+          }))
+       
          
       })
       .catch(error => {
