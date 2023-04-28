@@ -46,6 +46,7 @@ export const MainView = () => {
    }
    
    const handleAddToFavorite = (movieId) => {
+
       console.log("The value of movieId is: ", movieId);
 
       const accessToken = localStorage.getItem('token');
@@ -206,7 +207,7 @@ export const MainView = () => {
                                     md={4}
                                     className='mb-5'
                                  >
-                                    <MovieCard movie={movie} addToFavorites={handleAddToFavorite} />
+                                    <MovieCard movie={movie} addToFavorites={handleAddToFavorite} buttonTitle="Add to Favorites" />
 
                                  </Col>
                               ) ) }

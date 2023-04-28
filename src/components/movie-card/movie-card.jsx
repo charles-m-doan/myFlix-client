@@ -4,7 +4,7 @@ import { Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './movie-card.scss';
 
-export const MovieCard = ({movie, addToFavorites, setFavoriteMovies, user}) => {
+export const MovieCard = ({ movie, addToFavorites, setFavoriteMovies, user, buttonTitle }) => {
    console.log("MovieCard props:", movie);
 
    const [isFavorite, setIsFavorite] = useState(false);
@@ -26,7 +26,7 @@ export const MovieCard = ({movie, addToFavorites, setFavoriteMovies, user}) => {
                   <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
                <Button variant='link'> Open </Button>
             </Link>
-            <Button variant="outline-primary" onClick={handleClick} disabled={isFavorite}>Add to favorites</Button>
+            <Button variant="outline-primary" onClick={handleClick} disabled={isFavorite}>{buttonTitle}</Button>
          </Card.Body>
       </Card>
    );
@@ -40,5 +40,6 @@ MovieCard.propTypes = {
    }).isRequired,
    addToFavorites: PropTypes.func.isRequired,
    user: PropTypes.object.isRequired,
-   setFavoriteMovies: PropTypes.func.isRequired
+   setFavoriteMovies: PropTypes.func.isRequired,
+   buttonTitle: PropTypes.string.isRequired,
 };

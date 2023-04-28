@@ -19,7 +19,7 @@ console.log("movies: ", movies);
 console.log("user.favoriteMovies: ", user.favoriteMovies);
 
    // let favoriteMovies = movies.filter(movie => user.favoriteMovies.includes(movie.id));
-   
+
    const handleGetUserFavorites = () => {
       const accessToken = localStorage.getItem('token');
       const userName = JSON.parse(localStorage.getItem('user')).Username;
@@ -46,6 +46,15 @@ console.log("user.favoriteMovies: ", user.favoriteMovies);
       });
    };
    
+   // const handleClick = () => {
+   //    setIsFavorite(true);
+   //    addToFavorites(movie._id);
+   //    if (user && user.FavoriteMovies) {
+   //      setFavoriteMovies([user.FavoriteMovies, movie._id]);
+   //      setUser(updateUser);
+   //    }
+   //  };
+
    useEffect(() => {
       handleGetUserFavorites();
    }, []);
@@ -68,7 +77,7 @@ console.log("user.favoriteMovies: ", user.favoriteMovies);
             'Content-Type': 'application/json'
          }
       })
-      
+
       const response = await updateUser.json()
          if (response) {
             alert("Changes successful");
@@ -182,11 +191,14 @@ console.log("user.favoriteMovies: ", user.favoriteMovies);
                md={3}
                className='mb-3'
             >
+               
                <MovieCard
                   movie={movie}
-                  addToFavorites={addToFavorites}
+                  addToFavorites={ () => alert("Clicked in ProfileView") }
                   setFavoriteMovies={setFavoriteMovies}
                   user={user}
+                  buttonTitle="Remove from Favorites"
+                  // onClick={handleClick}
                />
             </Col>
          ))}
