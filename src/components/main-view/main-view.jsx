@@ -9,7 +9,7 @@ import { ProfileView } from '../profile-view/profile-view';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useParams } from 'react-router-dom';
+import { fetchMovies, addToFavorites } from "../../util/api";
 
 export const MainView = () => {
    const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -29,64 +29,42 @@ export const MainView = () => {
    };
 
    useEffect(() => {
-      getMovies(token);
-   }, [token]);
-
-   const getMovies = (token) => {
-      if (!token) {
-         return;
-      }
-
-      fetch('https://siders-myflix.herokuapp.com/movies', {
-         headers: { Authorization: `Bearer ${token}` }
-      }) .then((response) => response.json())
-         .then((data) => {
-            setMovies(data);
-         });
-   }
-   
-   const handleAddToFavorite = (movieId) => {
-
-      console.log("The value of movieId is: ", movieId);
-
+      fetchMovies(token)
+        .then((data) => {
+          setMovies(data);
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+    }, [token]);
+      
+    const handleAddToFavorite = (movieId) => {
       const accessToken = localStorage.getItem('token');
       const userName = JSON.parse(localStorage.getItem('user')).Username;
-      
-      // Add to favorites
-      fetch(`https://siders-myflix.herokuapp.com/users/${userName}/movies/${movieId}`, {
-         method: 'POST',
-         headers: {
-            'Authorization': `Bearer ${accessToken}`,
-            'Content-Type': 'application/json'
-         }
-      })
-      .then(response => response.json())
-      .then(data => {
-         console.log(`Movie added to favorites: ${JSON.stringify(data)}`);
-         alert("Movie added to favorites");
-         const updatedFavorites = [...user.FavoriteMovies, data._id];
-         user.FavoriteMovies.push(data._id);
-         const updateUser = { ...user, FavoriteMovies: updatedFavorites };
-         // setUser(updateUser);
-         setUser({ ...user, FavoriteMovies: updatedFavorites });
-
-         setMovies(prevMovies => prevMovies.map(movie => {
-            if (movie._id === data._id) {
-              return {
-                ...movie,
-                Favorite: true
+    
+      addToFavorites(userName, movieId, accessToken)
+        .then((data) => {
+          alert('Movie added to favorites');
+          const updatedFavorites = [...user.FavoriteMovies, data._id];
+          setUser({ ...user, FavoriteMovies: updatedFavorites });
+    
+          setMovies((prevMovies) =>
+            prevMovies.map((movie) => {
+              if (movie._id === data._id) {
+                return {
+                  ...movie,
+                  Favorite: true,
+                };
+              } else {
+                return movie;
               }
-            } else {
-              return movie;
-            }
-          }))
-       
-         
-      })
-      .catch(error => {
-         console.error(`Error adding movie to favorites: ${error}`);
-      });
-   };
+            })
+          );
+        })
+        .catch((error) => {
+          console.error(`Error adding movie to favorites: ${error}`);
+        });
+    };
 
    return (
       <BrowserRouter>

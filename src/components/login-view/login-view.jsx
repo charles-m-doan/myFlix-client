@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { loginUser } from '../../util/api';
 
 export const LoginView = ({ onLoggedIn } ) => {
    const [username, setUsername] = useState(' ');
@@ -9,34 +10,16 @@ export const LoginView = ({ onLoggedIn } ) => {
 
    const handleSubmit = (event) => {
       event.preventDefault();
+    
+      loginUser(username, password)
+        .then((data) => {
+          onLoggedIn(data.user, data.token);
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+    };
 
-      const data = {
-         Username: username.trim(),
-         Password: password
-      };
-
-      fetch('https://siders-myflix.herokuapp.com/login', {
-         method: 'POST',
-         headers: {
-         'Content-Type': 'application/json'
-         },
-         body: JSON.stringify(data)
-      })
-         .then((response) => response.json())
-         .then((data) => {
-         console.log("Login response: ", data);
-         if (data.user) {
-            localStorage.setItem('user', JSON.stringify(data.user));
-            localStorage.setItem('token', data.token);
-            onLoggedIn(data.user, data.token);
-         } else {
-            alert("No such user");
-         }
-         })
-         .catch((e) => {
-         alert("Something went wrong");
-         });
-   };
    return (
       <Form onSubmit={handleSubmit}>
          <Form.Group controlId='formUsername'>

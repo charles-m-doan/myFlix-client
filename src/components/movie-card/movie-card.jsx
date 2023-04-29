@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 import './movie-card.scss';
 
 export const MovieCard = ({ movie, addToFavorites, setFavoriteMovies, user, buttonTitle }) => {
-   console.log("MovieCard props:", movie);
-
    const [isFavorite, setIsFavorite] = useState(false);
    const handleClick = () => {
       setIsFavorite(true);

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Col, Form, Button, Row } from 'react-bootstrap';
 import { MovieCard } from '../movie-card/movie-card';
+import { getUserFavorites, updateUser, deleteAccount } from '../../util/api';
 
 export const ProfileView = ({ user, token, movies, onLoggedOut, updateUser }) => {
 
@@ -8,106 +9,73 @@ export const ProfileView = ({ user, token, movies, onLoggedOut, updateUser }) =>
    const [password, setPassword] = useState('');
    const [email, setEmail] = useState('');
    const [birthdate, setBirthdate] = useState('');
-   // const [favoriteMovies, setFavoriteMovies] = useState(user.favoriteMovies);
    const [favoriteMovies, setFavoriteMovies] = useState(user.FavoriteMovies || []);
    const [filteredMovies, setFilteredMovies] = useState([]);
 
-   const addToFavorites = (movie) => { };
-   
-console.log("user: ", user);
-console.log("movies: ", movies);
-console.log("user.favoriteMovies: ", user.favoriteMovies);
 
-   // let favoriteMovies = movies.filter(movie => user.favoriteMovies.includes(movie.id));
+   // FUNCTION DECLARATIONS ---------------------
 
    const handleGetUserFavorites = () => {
       const accessToken = localStorage.getItem('token');
       const userName = JSON.parse(localStorage.getItem('user')).Username;
-      
-      // Add to favorites
-      fetch(`https://siders-myflix.herokuapp.com/users/${userName}`, {
-         method: 'GET',
-         headers: {
-            'Authorization': `Bearer ${accessToken}`,
-            'Content-Type': 'application/json'
-         }
-      })
-      .then(response => response.json())
-      .then(data => {
-         console.log(`User profile: ${JSON.stringify(data)}`);
-      
-         // setUserProfile(data);
+    
+      getUserFavorites(userName, accessToken)
+        .then((data) => {
+          var filtered = movies.filter((movie) =>
+            data.FavoriteMovies.includes(movie._id)
+          );
+          setFilteredMovies(filtered);
+        })
+        .catch((error) => {
+          console.error(`Error: ${error}`);
+        });
+    };
 
-         var filtered = movies.filter(movie => data.FavoriteMovies.includes(movie._id))
-         setFilteredMovies(filtered);
-      })
-      .catch(error => {
-         console.error(`Error: ${error}`);
-      });
-   };
-   
-   // const handleClick = () => {
-   //    setIsFavorite(true);
-   //    addToFavorites(movie._id);
-   //    if (user && user.FavoriteMovies) {
-   //      setFavoriteMovies([user.FavoriteMovies, movie._id]);
-   //      setUser(updateUser);
-   //    }
-   //  };
-
-   useEffect(() => {
-      handleGetUserFavorites();
-   }, []);
-
-   const handleSubmit = async(event) => {
+    const handleSubmit = async (event) => {
       event.preventDefault();
-
+    
       const data = {
-         Username: username,
-         Password: password,
-         Email: email,
-         Birthday: birthdate
-       }       
- 
-      const updateUser = await fetch(`https://siders-myflix.herokuapp.com/users/${user.Username}`, {
-         method: 'PUT',
-         body: JSON.stringify(data),
-         headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-         }
-      })
-
-      const response = await updateUser.json()
-         if (response) {
-            alert("Changes successful");
-            localStorage.clear();
-            window.location.reload();
-         } else {
-            alert("Changes successful");
-         }
+        Username: username,
+        Password: password,
+        Email: email,
+        Birthday: birthdate,
       };
+    
+      const updateUserResponse = await updateUser(
+        user.Username,
+        data,
+        token
+      );
+    
+      if (updateUserResponse) {
+        alert('Changes successful');
+        localStorage.clear();
+        window.location.reload();
+      } else {
+        alert('Could not update user');
+      }
+    };
+    
+    const deleteAccount = () => {
+      deleteAccount(user.Username, token)
+        .then((success) => {
+          if (success) {
+            alert('The account has been deleted.');
+            onLoggedOut();
+          } else {
+            alert('Could not delete the account');
+          }
+        })
+        .catch((e) => {
+          alert(e);
+        });
+    };
 
-   const deleteAccount = () => {
-      fetch(`https://siders-myflix.herokuapp.com/users/${user.Username}`, {
-         method: 'DELETE',
-         headers: { Authorization: `Bearer ${token}` }
-      })
-      .then(response => {
-         if (response.ok) {
-               alert("The account has been deleted.");
-               onLoggedOut();
-         } else {
-               alert("Could not delete the account");
-         }
-      })
-      .catch(e => {
-         alert(e);
-      });
-   }
-
-   // const filteredMovies = movies.filter(movie => favoriteMovies.includes(movie._id));
-   // const filteredMovies = movies.filter(movie => favoriteMovies && favoriteMovies.includes(movie._id));
+    // EXECUTE REACT CODE ---------------------
+    
+    useEffect(() => {
+      handleGetUserFavorites();
+    }, []);
 
    return (
       <>
